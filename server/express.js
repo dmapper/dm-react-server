@@ -8,7 +8,6 @@ const compression = require('compression')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
-const healthcheck = require('dm-healthcheck')
 const connectMongo = require('connect-mongo')
 const resourceManager = require('./resourceManager')
 const defaultClientLayout = require('./defaultClientLayout')
@@ -39,7 +38,6 @@ module.exports = (appRoutes, error, options, cb) => {
 
     expressApp
       .use(compression())
-      .use(healthcheck())
       .use(serveStatic(options.publicPath))
       .use('/build/client', express.static(options.dirname + '/build/client'))
       .use(cookieParser())
