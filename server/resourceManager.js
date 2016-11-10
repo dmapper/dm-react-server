@@ -41,7 +41,7 @@ exports.getHash = _.memoize((appName, type) => {
   let hash = ''
   let assetsMetaPath = path.join(PROJECT_PATH, BUILD_CLIENT_PATH, 'assets.json')
   try {
-    assetsMeta = require(assetsMetaPath)
+    assetsMeta = JSON.parse(fs.readFileSync(assetsMetaPath))
   } catch (e) {
     throw new Error('Error loading assets meta file at: ' + assetsMetaPath)
   }
