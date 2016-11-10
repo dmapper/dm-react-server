@@ -10,7 +10,7 @@ const _ = require('lodash')
 let PROJECT_PATH = process.env.PROJECT_PATH || process.cwd()
 let BUILD_CLIENT_PATH = process.env.BUILD_CLIENT_PATH || '/build/client/'
 
-exports.getResourcePath = _.memoize((type, appName) => {
+exports.getResourcePath = (type, appName) => {
   let prefix = ''
   let url = 'ERROR_EMPTY'
   let postfix = ''
@@ -31,10 +31,10 @@ exports.getResourcePath = _.memoize((type, appName) => {
       throw new Error('No resource found for \'' + type + '\'')
   }
   return url
-})
+}
 
 // Get assets hashes in production (used for long term caching)
-exports.getHash = _.memoize((appName, type) => {
+exports.getHash = (appName, type) => {
   if (process.env.NODE_ENV !== 'production') return
   if (!appName) return ''
   let assetsMeta
@@ -61,9 +61,9 @@ exports.getHash = _.memoize((appName, type) => {
       throw new Error('No hash exists for assets of type \'' + type + '\'')
   }
   return hash
-})
+}
 
-exports.getProductionStyles = _.memoize((appName) => {
+exports.getProductionStyles = (appName) => {
   var styleRelPath = exports.getResourcePath('style', appName)
   var stylePath = path.join(PROJECT_PATH, styleRelPath)
   if (!fs.existsSync(stylePath)) {
@@ -73,4 +73,4 @@ exports.getProductionStyles = _.memoize((appName) => {
   }
   var style = fs.readFileSync(stylePath, {encoding: 'utf8'})
   return '<style>' + style + '</style>'
-})
+}
