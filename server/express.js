@@ -71,7 +71,7 @@ module.exports = (appRoutes, error, options, cb) => {
         // If client route found, render the client-side app
         if (err) return next('500: ' + req.url + '. Error: ' + err)
         let html = defaultClientLayout({
-          title: options.title || '',
+          title: options.title,
           styles: process.env.NODE_ENV === 'production'
               ? resourceManager.getProductionStyles(appName) : '',
           head: getHead(appName),

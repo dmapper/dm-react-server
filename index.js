@@ -18,6 +18,7 @@ module.exports = (options = {}, cb) => {
     appRoutes: {},
     publicPath: './public',
     bodyParserLimit: '10mb',
+    title: '',
     error: errorApp
   })
 
